@@ -28,6 +28,7 @@ usage() {
 while [ $# != 0 ]; do
     case $1 in
     -h|--help) usage ;;
+    -) usage "Unknown option: $1" ;;
     -?*) usage "Unknown option: $1" ;;
     esac
     shift
