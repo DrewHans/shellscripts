@@ -91,6 +91,11 @@ echo "deb https://mkvtoolnix.download/ubuntu/ bionic main" | tee /etc/apt/source
 echo "deb-src https://mkvtoolnix.download/ubuntu/ bionic main" | tee -a /etc/apt/sources.list.d/mkvtoolnix.download.list
 echo
 
+echo "Adding neofetch PPA"
+echo
+add-apt-repository ppa:dawidd0811/neofetch
+echo
+
 echo "Adding qBittorrent PPA"
 echo
 add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
@@ -129,7 +134,10 @@ inkscape \
 keepass2 \
 mkvtoolnix mkvtoolnix-gui \
 nemo \
+neofetch \
+nmap \
 qbittorrent \
+sleuthkit \
 sublime-text \
 vim \
 --yes
