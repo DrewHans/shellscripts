@@ -117,6 +117,7 @@ chromium-browser \
 clementine \
 conky \
 dconf-editor \
+dos2unix \
 ffmpegthumbnailer \
 gimp \
 git \
