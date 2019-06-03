@@ -6,6 +6,7 @@ print_install_result() {
     if [ $# != 2 ]; then
         echo "Error: function print_install_result requires 2 args"
         echo "$# args passed: $@"
+        echo "Check $0 for bugs"
         exit 1
     fi
 
@@ -121,6 +122,7 @@ balena-etcher-electron \
 chromium-browser \
 clementine \
 conky \
+curl \
 dconf-editor \
 dos2unix \
 ffmpegthumbnailer \
@@ -158,6 +160,15 @@ echo "Installing Ubuntu-Drivers (usually just NVIDIA drivers)"
 echo
 ubuntu-drivers autoinstall
 print_install_result "Ubuntu-Driver install" $?
+
+echo "Installing youtube-dl"
+echo
+curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+print_install_result "youtube-dl install" $?
+chmod a+rx /usr/local/bin/youtube-dl
+echo "Updating youtube-dl to most recent version"
+youtube-dl --update
+echo
 
 echo "Cleaning up install files"
 cd ..
