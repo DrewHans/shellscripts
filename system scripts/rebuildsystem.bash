@@ -119,6 +119,7 @@ echo
 apt install \
 audacity \
 balena-etcher-electron \
+brasero \
 chromium-browser \
 clementine \
 conky \
@@ -129,7 +130,9 @@ ffmpegthumbnailer \
 gimp \
 git \
 gnome-tweak-tool \
+gnupg2 \
 gparted \
+gufw \
 handbrake \
 htop \
 inkscape \
