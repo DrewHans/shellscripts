@@ -55,9 +55,13 @@ eval "set -- $args"
 test $# == 0 || usage "Error: unexpected argument: $1"
 test "$EUID" -eq 0 || usage "Error: please run as root"
 
+
+
 echo "Starting $0"
 mkdir rebuildsystem-temp
 cd rebuildsystem-temp
+
+
 
 echo "Adding Audacity PPA"
 echo
@@ -108,10 +112,14 @@ wget -q -O - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 echo
 
+
+
 echo "Performing apt update"
 echo
 apt update
 echo
+
+
 
 echo "Installing apt packages"
 echo
@@ -127,6 +135,7 @@ curl \
 dconf-editor \
 dos2unix \
 ffmpegthumbnailer \
+ghex \
 gimp \
 git \
 gnome-tweak-tool \
@@ -137,6 +146,8 @@ handbrake \
 htop \
 inkscape \
 keepass2 \
+keepassxc \
+mediainfo \
 mkvtoolnix mkvtoolnix-gui \
 nemo \
 neofetch \
@@ -145,14 +156,22 @@ qbittorrent \
 sleuthkit \
 sublime-text \
 vim \
+virtualbox-6.0 \
 --yes
 
 print_install_result "apt install <packages>" $?
 
+
+
 echo "Installing snap packages"
 echo
-snap install vlc
+
+snap install \
+vlc
+
 print_install_result "snap install <packages>" $?
+
+
 
 echo "Downloading Calibre installer (installer will run after download)"
 echo
@@ -173,18 +192,28 @@ echo "Updating youtube-dl to most recent version"
 youtube-dl --update
 echo
 
+
+
 echo "Cleaning up install files"
 cd ..
 rm -r ./rebuildsystem-temp
 echo "... clean up finished."
 echo
 
-echo "Visit the following links and manually download the appropriate .deb file:"
+
+
+echo "Visit the following links and manually download the appropriate .deb & run files:"
 echo "- BleachBit: https://www.bleachbit.org/"
 echo "- Dropbox: https://www.dropbox.com/"
 echo "- Keybase: https://keybase.io/"
+echo "- NordVPN: https://nordvpn.com/"
+echo "- Tor: https://www.torproject.org/"
+echo "- Veracrypt: https://veracrypt.fr/en/"
 echo "- VS Code: https://code.visualstudio.com/"
 echo
+
+
+
 echo "rebuildsystem.bash complete!"
 echo 
 
