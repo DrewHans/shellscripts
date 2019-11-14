@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 # Author: Drew Hans (github.com/drewhans555)
-# Date: 2019-06-02
+# Date (last modified): 2019-11-13
 
-print_install_result() {
+
+
+tmpdir=.build-system.bash.tmpdir
+logfile=.build-system.bash.log
+
+
+
+log_operation() {
     if [ $# != 2 ]; then
-        echo "Error: function print_install_result requires 2 args"
+        echo "Error: function log_operation requires 2 args"
         echo "$# args passed: $@"
         echo "Check $0 for bugs"
         exit 1
@@ -12,15 +19,8 @@ print_install_result() {
 
     operation=$1
     result=$2
-    echo
-    if [ $result -eq 0 ]; then
-        echo "$operation succeeded!"
-
-    else
-        echo "$operation returned $result (0 indicates success)."
-        read -p "Press enter to continue..."
-    fi
-    echo
+    
+    echo "$operation returned $result (0 indicates success).\n" | tee ../$logfile
 }
 
 usage() {
@@ -34,11 +34,11 @@ usage() {
     echo "  -h, --help    Print this help"
     echo
     echo "Run this script on a fresh Ubuntu 18.04 install."
-    echo "This script will install:"
-    echo " git, SublimeText"
     echo
     exit $exitcode
 }
+
+
 
 args=
 while [ $# != 0 ]; do
@@ -58,8 +58,8 @@ test "$EUID" -eq 0 || usage "Error: please run as root"
 
 
 echo "Starting $0"
-mkdir rebuildsystem-temp
-cd rebuildsystem-temp
+mkdir $tmpdir
+cd $tmpdir
 
 
 
@@ -159,7 +159,7 @@ vim \
 virtualbox-6.0 \
 --yes
 
-print_install_result "apt install <packages>" $?
+log_operation "apt install <packages>" $?
 
 
 
@@ -169,34 +169,37 @@ echo
 snap install \
 vlc
 
-print_install_result "snap install <packages>" $?
+log_operation "snap install <packages>" $?
 
 
 
 echo "Downloading Calibre installer (installer will run after download)"
 echo
 wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
-print_install_result "Calibre install" $?
-
-echo "Installing Ubuntu-Drivers (usually just NVIDIA drivers)"
-echo
-ubuntu-drivers autoinstall
-print_install_result "Ubuntu-Driver install" $?
+log_operation "Calibre install" $?
 
 echo "Installing youtube-dl"
 echo
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-print_install_result "youtube-dl install" $?
+log_operation "youtube-dl install" $?
 chmod a+rx /usr/local/bin/youtube-dl
 echo "Updating youtube-dl to most recent version"
 youtube-dl --update
+log_operation "youtube-dl update" $?
 echo
+
+
+
+echo "Installing Ubuntu-Drivers (usually just NVIDIA drivers)"
+echo
+ubuntu-drivers autoinstall
+log_operation "ubuntu-drivers autoinstall" $?
 
 
 
 echo "Cleaning up install files"
 cd ..
-rm -r ./rebuildsystem-temp
+rm -r ./$tmpdir
 echo "... clean up finished."
 echo
 
