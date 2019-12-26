@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Author: Drew Hans (github.com/drewhans555)
-# Date (last modified): 2019-11-13
+# Date (last modified): 2019-12-25
 
+tmpdir=./$0.tmpdir
+logfile=./$0.log
 
-
-tmpdir=.build-system.bash.tmpdir
-logfile=.build-system.bash.log
-
-
+echo_break() {
+    echo "==========//////////========="
+}
 
 log_operation() {
     if [ $# != 2 ]; then
@@ -38,8 +38,6 @@ usage() {
     exit $exitcode
 }
 
-
-
 args=
 while [ $# != 0 ]; do
     case $1 in
@@ -60,64 +58,81 @@ test "$EUID" -eq 0 || usage "Error: please run as root"
 echo "Starting $0"
 mkdir $tmpdir
 cd $tmpdir
+echo_break
 
 
 
 echo "Adding Audacity PPA"
 echo
 add-apt-repository ppa:ubuntuhandbook1/audacity
-echo
+echo_break
+
+
 
 echo "Adding balenaEtcher PPA & Keys"
 echo
 echo "deb https://deb.etcher.io stable etcher" | tee /etc/apt/sources.list.d/balena-etcher.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-echo
+echo_break
+
+
 
 echo "Adding GIMP PPA"
 echo
 add-apt-repository ppa:otto-kesselgulasch/gimp
-echo
+echo_break
+
+
 
 echo "Adding git PPA"
 echo
 add-apt-repository ppa:git-core/ppa
-echo
+echo_break
+
+
 
 echo "Adding Inkscape PPA"
 echo
 add-apt-repository ppa:inkscape.dev/stable
-echo
+echo_break
+
+
 
 echo "Adding mkvtoolnix gpg key & PPA"
 echo
 wget -q -O - https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt | apt-key add -
 echo "deb https://mkvtoolnix.download/ubuntu/ bionic main" | tee /etc/apt/sources.list.d/mkvtoolnix.download.list
 echo "deb-src https://mkvtoolnix.download/ubuntu/ bionic main" | tee -a /etc/apt/sources.list.d/mkvtoolnix.download.list
-echo
+echo_break
+
+
 
 echo "Adding neofetch PPA"
 echo
 add-apt-repository ppa:dawidd0811/neofetch
-echo
+echo_break
+
+
 
 echo "Adding qBittorrent PPA"
 echo
 add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
-echo
+echo_break
+
+
 
 echo "Adding SublimeText gpg key & PPA"
 echo
 wget -q -O - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-echo
+echo_break
 
 
 
 echo "Performing apt update"
 echo
 apt update
-echo
+echo_break
 
 
 
@@ -125,6 +140,7 @@ echo "Installing apt packages"
 echo
 
 apt install \
+arc-theme \
 audacity \
 balena-etcher-electron \
 brasero \
@@ -152,14 +168,16 @@ mkvtoolnix mkvtoolnix-gui \
 nemo \
 neofetch \
 nmap \
+numix-gtk-theme \
+numix-icon-theme \
 qbittorrent \
 sleuthkit \
 sublime-text \
 vim \
-virtualbox-6.0 \
 --yes
 
 log_operation "apt install <packages>" $?
+echo_break
 
 
 
@@ -170,6 +188,7 @@ snap install \
 vlc
 
 log_operation "snap install <packages>" $?
+echo_break
 
 
 
@@ -177,6 +196,9 @@ echo "Downloading Calibre installer (installer will run after download)"
 echo
 wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
 log_operation "Calibre install" $?
+echo_break
+
+
 
 echo "Installing youtube-dl"
 echo
@@ -186,7 +208,7 @@ chmod a+rx /usr/local/bin/youtube-dl
 echo "Updating youtube-dl to most recent version"
 youtube-dl --update
 log_operation "youtube-dl update" $?
-echo
+echo_break
 
 
 
@@ -194,6 +216,7 @@ echo "Installing Ubuntu-Drivers (usually just NVIDIA drivers)"
 echo
 ubuntu-drivers autoinstall
 log_operation "ubuntu-drivers autoinstall" $?
+echo_break
 
 
 
@@ -201,7 +224,7 @@ echo "Cleaning up install files"
 cd ..
 rm -r ./$tmpdir
 echo "... clean up finished."
-echo
+echo_break
 
 
 
@@ -213,11 +236,10 @@ echo "- NordVPN: https://nordvpn.com/"
 echo "- Tor: https://www.torproject.org/"
 echo "- Veracrypt: https://veracrypt.fr/en/"
 echo "- VS Code: https://code.visualstudio.com/"
-echo
+echo_break
 
 
 
 echo "rebuildsystem.bash complete!"
 echo 
-
 exit 0
