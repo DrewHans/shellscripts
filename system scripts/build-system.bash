@@ -164,6 +164,7 @@ inkscape \
 keepass2 \
 keepassxc \
 mediainfo \
+mediainfo-gui \
 mkvtoolnix mkvtoolnix-gui \
 nemo \
 neofetch \
