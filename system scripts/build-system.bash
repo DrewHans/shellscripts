@@ -175,6 +175,7 @@ qbittorrent \
 sleuthkit \
 sublime-text \
 vim \
+zfsutils-linx \
 --yes
 
 log_operation "apt install <packages>" $?
