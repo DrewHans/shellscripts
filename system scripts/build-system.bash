@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Author: Drew Hans (github.com/drewhans555)
-# Date (last modified): 2019-12-25
 
 tmpdir=./$0.tmpdir
 logfile=./$0.log
