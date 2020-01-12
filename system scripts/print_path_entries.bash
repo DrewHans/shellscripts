@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #
 # Author: Drew Hans (github.com/drewhans555)
-# Date: 2018-09-19
 
 usage() {
     local exitcode=0
