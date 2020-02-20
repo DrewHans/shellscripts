@@ -38,4 +38,6 @@ done
 eval "set -- $args"
 test $# == 1 || usage "Error: specify a YouTube playlist url"
 
-youtube-dl -f 140 -o "%(title)s.%(ext)s" $1
+youtube-dl -i -f 140 -o "%(title)s.%(ext)s" $1
+# -i => ignore errors
+# -f 140 => download audio only
