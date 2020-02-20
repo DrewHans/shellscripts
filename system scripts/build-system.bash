@@ -186,6 +186,7 @@ echo "Installing snap packages"
 echo
 
 snap install \
+ffmpeg \
 vlc
 
 log_operation "snap install <packages>" $?
