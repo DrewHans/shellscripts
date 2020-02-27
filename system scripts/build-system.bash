@@ -171,6 +171,7 @@ nmap \
 numix-gtk-theme \
 numix-icon-theme \
 qbittorrent \
+rename \
 sleuthkit \
 sublime-text \
 vim \
