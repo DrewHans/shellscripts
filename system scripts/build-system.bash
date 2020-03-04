@@ -188,6 +188,7 @@ echo
 
 snap install \
 ffmpeg \
+postman \
 vlc
 
 log_operation "snap install <packages>" $?
