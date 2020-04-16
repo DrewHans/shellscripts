@@ -188,8 +188,10 @@ echo
 
 snap install \
 ffmpeg \
+gallery-dl \
 postman \
-vlc
+vlc \
+youtube-dl
 
 log_operation "snap install <packages>" $?
 echo_break
@@ -200,18 +202,6 @@ echo "Downloading Calibre installer (installer will run after download)"
 echo
 wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin
 log_operation "Calibre install" $?
-echo_break
-
-
-
-echo "Installing youtube-dl"
-echo
-curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-log_operation "youtube-dl install" $?
-chmod a+rx /usr/local/bin/youtube-dl
-echo "Updating youtube-dl to most recent version"
-youtube-dl --update
-log_operation "youtube-dl update" $?
 echo_break
 
 
