@@ -161,10 +161,10 @@ handbrake \
 htop \
 inkscape \
 keepass2 \
-keepassxc \
 mediainfo \
 mediainfo-gui \
-mkvtoolnix mkvtoolnix-gui \
+mkvtoolnix \
+mkvtoolnix-gui \
 nemo \
 neofetch \
 nmap \
@@ -175,7 +175,6 @@ rename \
 sleuthkit \
 sublime-text \
 vim \
-zfsutils-linx \
 --yes
 
 log_operation "apt install <packages>" $?
@@ -224,8 +223,10 @@ echo_break
 
 echo "Visit the following links and manually download the appropriate .deb & run files:"
 echo "- BleachBit: https://www.bleachbit.org/"
+echo "- Brave Browser: https://brave.com/"
 echo "- Dropbox: https://www.dropbox.com/"
 echo "- Keybase: https://keybase.io/"
+echo "- Korla Icons: https://github.com/bikass/korla"
 echo "- NordVPN: https://nordvpn.com/"
 echo "- Tor: https://www.torproject.org/"
 echo "- Veracrypt: https://veracrypt.fr/en/"
@@ -234,6 +235,6 @@ echo_break
 
 
 
-echo "rebuildsystem.bash complete!"
+echo "$0 complete!"
 echo 
 exit 0
