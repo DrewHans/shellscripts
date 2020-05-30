@@ -174,6 +174,7 @@ qbittorrent \
 rename \
 sleuthkit \
 sublime-text \
+testdisk \
 vim \
 --yes
 
