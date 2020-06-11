@@ -156,6 +156,7 @@ git \
 gnome-tweak-tool \
 gnupg2 \
 gparted \
+grsync \
 gufw \
 handbrake \
 htop \
@@ -172,6 +173,7 @@ numix-gtk-theme \
 numix-icon-theme \
 qbittorrent \
 rename \
+rsync \
 sleuthkit \
 sublime-text \
 testdisk \
