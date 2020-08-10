@@ -11,7 +11,7 @@ echo_break() {
 log_operation() {
     if [ $# != 2 ]; then
         echo "Error: function log_operation requires 2 args"
-        echo "$# args passed: $@"
+        echo "$# args passed: $*"
         echo "Check $0 for bugs"
         exit 1
     fi
@@ -19,7 +19,7 @@ log_operation() {
     operation=$1
     result=$2
     
-    echo "$operation returned $result (0 indicates success).\n" | tee ../$logfile
+    echo "$operation returned $result (0 indicates success)." | tee ../"$logfile"
 }
 
 usage() {
@@ -55,8 +55,8 @@ test "$EUID" -eq 0 || usage "Error: please run as root"
 
 
 echo "Starting $0"
-mkdir $tmpdir
-cd $tmpdir
+mkdir "$tmpdir"
+cd "$tmpdir" || echo "Error: Failed to cd into $tmpdir." | tee ../"$logfile" && exit
 echo_break
 
 
@@ -218,7 +218,7 @@ echo_break
 
 echo "Cleaning up install files"
 cd ..
-rm -r ./$tmpdir
+rm -r ./"$tmpdir"
 echo "... clean up finished."
 echo_break
 
