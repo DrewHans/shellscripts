@@ -14,7 +14,6 @@ command -v dos2unix >/dev/null 2>&1 || {
 
 # copy bin to HOME
 cp -ru ./bin ~/
-rm ~/bin/README.md
 for f in ~/bin/*.*sh; do
     dos2unix $f
     chmod 744 $f
