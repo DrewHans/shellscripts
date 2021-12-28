@@ -13,21 +13,15 @@ echo "Turning killswitch off"
 nordvpn set killswitch off
 
 echo "Stopping nordvpn services"
-sudo systemctl stop nordvpn.service
-sudo systemctl stop nordvpnd.service
+systemctl is-active --quiet nordvpn.service && sudo systemctl stop nordvpn.service
+systemctl is-active --quiet nordvpnd.service && sudo systemctl stop nordvpnd.service
 
 echo "Flushing iptables"
 sudo iptables --flush
 
 echo "Restarting nordvpn"
-sudo systemctl start nordvpnd
-sudo systemctl start nordvpn
-
-echo "Reconnecting to VPN server"
-nordvpn c
-
-echo "Turning killswitch on"
-nordvpn set killswitch on
+systemctl is-active --quiet nordvpn.service || sudo systemctl start nordvpnd
+systemctl is-active --quiet nordvpnd.service || sudo systemctl start nordvpn
 
 
 echo "Finished"
