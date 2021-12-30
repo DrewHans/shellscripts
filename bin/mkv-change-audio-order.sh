@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+
+# check prerequisite program mkvpropedit is installed
+command -v mkvpropedit >/dev/null 2>&1 || {
+    echo "mkvpropedit program not found; aborting"
+    exit 1
+}
+
 echo "Start\n"
 
 for f in *.mkv

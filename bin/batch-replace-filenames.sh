@@ -7,6 +7,12 @@ if [[ $# -ne 2 ]]; then
     exit 1
 fi
 
+# check prerequisite program rename is installed
+command -v rename >/dev/null 2>&1 || {
+    echo "rename program not found; aborting"
+    exit 1
+}
+
 search_str=$1
 replace_str=$2
 

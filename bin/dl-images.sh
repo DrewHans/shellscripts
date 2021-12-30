@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 
+# check prerequisite program gallery-dl is installed
+command -v gallery-dl >/dev/null 2>&1 || {
+    echo "gallery-dl program not found; aborting"
+    exit 1
+}
+
 start_index=1
 end_index=99
 

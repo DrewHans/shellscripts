@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+
+# check prerequisite program xsetwacom is installed
+command -v xsetwacom >/dev/null 2>&1 || {
+    echo "xsetwacom program not found; aborting"
+    exit 1
+}
+
 # top left tablet button
 xsetwacom --set 'HUION Huion Tablet_HS64 Pad pad' Button 1 "key +shift +ctrl +alt +f"
 

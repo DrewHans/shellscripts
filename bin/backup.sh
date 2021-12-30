@@ -7,6 +7,12 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit 1
 fi
 
+# check prerequisite program rsync is installed
+command -v rsync >/dev/null 2>&1 || {
+    echo "rsync program not found; aborting"
+    exit 1
+}
+
 echo "Starting $0"
 
 src_path="/media/veracrypt1"  # should be master drive
