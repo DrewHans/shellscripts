@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # regexp to get a valid url
 
 echo $1 | grep -qE '^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$'

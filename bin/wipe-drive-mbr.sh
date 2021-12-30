@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 echo "Drives available for MBR wiping:"
 lsblk | grep /dev/
 

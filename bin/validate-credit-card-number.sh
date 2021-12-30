@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # regexp to get a valid credit card number
 
 echo $1 | grep -qE '^([0-9]{4}[- ]?){3}[0-9]{4}$'

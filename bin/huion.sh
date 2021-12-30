@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Author: Drew Hans (github.com/drewhans555)
 
 # top left tablet button
 xsetwacom --set 'HUION Huion Tablet_HS64 Pad pad' Button 1 "key +shift +ctrl +alt +f"

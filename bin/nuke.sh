@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
 
-# destroy bash history
-rm ~/.bash_history
 
-# destroy brave browser cache
-rm -r ~/.cache/BraveSoftware
+function nuke_file() {
+    ## rm if file exists
+    [[ -f $1 ]] && rm $1
+}
 
-# destroy keepassxc cache
-rm -r ~/.cache/keepassxc
+function nuke_directory() {
+    ## rm if dir exists
+    [[ -d $1 ]] && rm -r $1
+}
 
-# destroy qbittorrent cache
-rm -r ~/.cache/qBittorrent
+# destroy bash history if it exists
+nuke_file ~/.bash_history
 
-# destroy thumbnail cache
-rm -r ~/.cache/thumbnails
+# destroy brave browser cache if it exists
+nuke_directory ~/.cache/BraveSoftware
+
+# destroy keepassxc cache if it exists
+nuke_directory ~/.cache/keepassxc
+
+# destroy qbittorrent cache if it exists
+nuke_directory ~/.cache/qBittorrent
+
+# destroy thumbnail cache if it exists
+nuke_directory ~/.cache/thumbnails
 
 echo "nuked"

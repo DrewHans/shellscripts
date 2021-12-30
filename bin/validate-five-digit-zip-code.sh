@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # regexp to get a valid US postal code
 echo $1 | grep -qE '^[0-9]{5}(-[0-9]{4})?$'
 

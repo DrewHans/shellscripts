@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # regexp to get a valid hexadecimal value
 
 echo $1 | grep -qE '^#?([a-f0-9]{6}|[a-f0-9]{3})$'

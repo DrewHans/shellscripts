@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # declare env variables required by proton
 STEAM_COMPAT_CLIENT_INSTALL_PATH=~/.var/app/com.valvesoftware.Steam/.local/share/Steam/
 STEAM_COMPAT_DATA_PATH=/mnt/gamedisk/steam/steamapps/compatdata

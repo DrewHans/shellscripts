@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Author: Drew Hans (github.com/drewhans555)
 
-for a in ./*.flac; do
+
+for a in *.flac; do
   ffmpeg -i "$a" -b:a 256k "${a[@]/%flac/mp3}"
 done
 

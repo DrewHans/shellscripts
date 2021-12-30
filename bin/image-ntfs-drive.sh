@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-# Author: Drew Hans (github.com/drewhans555)
+
+
+# check prerequisite program ntfsclone is installed
+command -v ntfsclone >/dev/null 2>&1 || {
+    echo "ntfsclone program not found; aborting"
+    exit 1
+}
 
 src=/media/nyancat/MyNTFSDrive
 dst=/media/nyancat/SomeDrive

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # exit if not running as root
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Error: You must run this script as root"
@@ -10,6 +11,18 @@ echo "Starting $0"
 
 src_path="/media/veracrypt1"  # should be master drive
 dest_path="/media/veracrypt2"  # should be backup drive
+
+if [[ ! -d "$src_path" ]]
+then
+    echo "$src_path directory not found; aborting"
+    exit 1
+fi
+
+if [[ ! -d "$dest_path" ]]
+then
+    echo "$dest_path directory not found; aborting"
+    exit 1
+fi
 
 echo "Regenerating master.index file"
 

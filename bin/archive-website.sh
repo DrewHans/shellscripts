@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-# Author: Drew Hans (github.com/drewhans555)
+
+
+if [[ $# -ne 1 ]]; then
+    echo "Error: specify a website url"
+    echo "Usage: $0 <website_url>"
+    exit 1
+fi
+
+website_url=$1
 
 wget \
   --mirror \
@@ -15,4 +23,4 @@ wget \
   --recursive \
   --no-parent \
   --level=1 \
-  https://drewhans555.github.io
+  $website_url
