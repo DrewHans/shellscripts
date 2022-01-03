@@ -15,8 +15,10 @@ command -v nordvpn >/dev/null 2>&1 || {
 
 echo "Starting script"
 
-echo "Turning killswitch off"
-nordvpn set killswitch off
+systemctl is-active --quiet nordvpn.service && {
+    echo "Turning killswitch off"
+    nordvpn set killswitch off
+}
 
 echo "Stopping nordvpn services"
 systemctl is-active --quiet nordvpn.service && sudo systemctl stop nordvpn.service
