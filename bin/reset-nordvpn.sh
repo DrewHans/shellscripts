@@ -20,15 +20,22 @@ systemctl is-active --quiet nordvpn.service && {
     nordvpn set killswitch off
 }
 
-echo "Stopping nordvpn services"
+echo "Stopping nordvpn service"
 systemctl is-active --quiet nordvpn.service && sudo systemctl stop nordvpn.service
+sleep 2
+
+echo "Stopping nordvpnd service"
 systemctl is-active --quiet nordvpnd.service && sudo systemctl stop nordvpnd.service
+sleep 2
 
 echo "Flushing iptables"
 sudo iptables --flush
+sleep 3
 
-echo "Restarting nordvpn"
+echo "Restarting nordvpnd"
 systemctl is-active --quiet nordvpnd.service || sudo systemctl start nordvpnd
+sleep 2
+echo "Restarting nordvpn"
 systemctl is-active --quiet nordvpn.service || sudo systemctl start nordvpn
 
 echo "Finished"
