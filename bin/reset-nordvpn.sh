@@ -38,4 +38,9 @@ sleep 2
 echo "Restarting nordvpn"
 systemctl is-active --quiet nordvpn.service || sudo systemctl start nordvpn
 
+
+echo "Flushing iptables again just to be safe"
+sudo iptables --flush
+sleep 1
+
 echo "Finished"
