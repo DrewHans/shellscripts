@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
 
-sudo apt update
+sudo apt update && sudo apt upgrade --yes
 
-sudo apt upgrade
+sudo -u ${SUDO_USER} flatpak update --assumeyes
 
-sudo apt dist-upgrade
-
-sudo apt autoremove
-
-sudo apt autoclean
+sudo yt-dlp --update

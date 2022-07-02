@@ -43,9 +43,4 @@ echo "Flushing iptables again just to be safe"
 sudo iptables --flush
 sleep 1
 
-nordvpn set killswitch off
-nordvpn c US
-nordvpn set killswitch on
-nordvpn status
-
 echo "Finished"
