@@ -15,6 +15,7 @@ command -v yt-dlp >/dev/null 2>&1 || {
 
 playlist_url=$1
 
-yt-dlp -i -f 140 -o "%(title)s.%(ext)s" $playlist_url
+yt-dlp -i -x --audio-format mp3 -o "%(title)s.%(ext)s" $playlist_url
 # -i => ignore errors
-# -f 140 => download audio only
+# -x => dl audio only
+# --audio-format mp3 => save as mp3 with best quality available
