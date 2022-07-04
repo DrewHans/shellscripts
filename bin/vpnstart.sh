@@ -16,12 +16,13 @@ command -v openvpn >/dev/null 2>&1 || {
 
 # pick a random server in the us
 #vpnserver=( $(shuf -zen1 /etc/openvpn/ovpn_udp/us*) )
-configfile=$( ls -f /etc/openvpn/ovpn_udp/us[0-9]* | shuf -n1 )
+vpnconfigfile=$( ls -f /etc/openvpn/ovpn_udp/us[0-9]* | shuf -n1 )
+vpnserver=${vpnconfigfile#/etc/openvpn/ovpn_udp/}
 
-echo "Connecting to $configfile..."
+echo "Connecting to $vpnserver..."
 
 openvpn \
---config $configfile \
+--config $vpnconfigfile \
 --auth-user-pass /etc/openvpn/nordvpn_auth.txt \
 --log /var/log/openvpn/log.txt \
 --status /var/log/openvpn/status.txt 10 \
@@ -33,10 +34,15 @@ openvpn \
 # --daemon => run in the background
 
 sleep 2
+chown 1000:1000 /var/log/openvpn/status.txt
+echo ""
 
-chown nyancat:nyancat /var/log/openvpn/status.txt
-cat /var/log/openvpn/status.txt
+touch /var/log/openvpn/connection.txt
+echo "$vpnserver" > /var/log/openvpn/connection.txt
+chown 1000:1000 /var/log/openvpn/connection.txt
 
 echo "Enabling on killswitch"
 # TODO: figure out how to enable passive killswitch option
+echo ""
+
 echo "Finished"
