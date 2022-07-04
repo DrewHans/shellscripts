@@ -23,8 +23,8 @@ echo "Connecting to $configfile..."
 openvpn \
 --config $configfile \
 --auth-user-pass /etc/openvpn/nordvpn_auth.txt \
---log /etc/openvpn/log.txt \
---status /etc/openvpn/status.txt 10 \
+--log /var/log/openvpn/log.txt \
+--status /var/log/openvpn/status.txt 10 \
 --daemon
 # --config file => vpn configuration file
 # --auth-user-pass file => file with vpn auth credentials
@@ -34,9 +34,9 @@ openvpn \
 
 sleep 2
 
-echo "OPENVPN status:"
-cat /etc/openvpn/status.txt
+chown nyancat:nyancat /var/log/openvpn/status.txt
+cat /var/log/openvpn/status.txt
 
-# todo: figure out how to enable passive killswitch option
-echo "Turning on killswitch"
+echo "Enabling on killswitch"
+# TODO: figure out how to enable passive killswitch option
 echo "Finished"
