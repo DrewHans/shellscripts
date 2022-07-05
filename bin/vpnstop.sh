@@ -15,4 +15,7 @@ command -v openvpn >/dev/null 2>&1 || {
 
 killall openvpn
 
+
+echo "Disconnected" > /var/log/openvpn/status.txt
+
 # todo: figure out how to undo the passive killswitch, if activated
