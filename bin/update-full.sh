@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
 
-sudo apt update
+# exit if not running as root
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Error: You must run this script as root"
+    exit 1
+fi
 
-sudo apt upgrade --yes
+apt update
 
-sudo apt dist-upgrade --yes
+apt upgrade --yes
 
-sudo apt autoremove --yes
+apt dist-upgrade --yes
 
-sudo apt autoclean --yes
+apt autoremove --yes
+
+apt autoclean --yes
