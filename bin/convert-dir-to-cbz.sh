@@ -11,25 +11,30 @@ function check_dependency {
 }
 
 # safety checks
-check_dependency "ffmpeg"
+check_dependency "zip"
 
 if [ $# -eq 0 ]
 then
-	for f in *.wav; do
-		ffmpeg -i "$f" -b:a 256k "${f[@]/%wav/mp3}"
+	for d in *; do
+		if [ -d "${d}" ]
+		then
+			echo "Converting ${d} to cbz file"
+			zip -r ./"${d}.cbz" ./"${d}"
+		fi
 	done
 fi
 
 if [ $# -eq 1 ] && [ -d "$1" ]
 then
-	for f in $1/*.wav; do
-		ffmpeg -i "$f" -b:a 256k "${f[@]/%wav/mp3}"
-	done
+	echo "Converting ${1} to cbz file"
+	zip -r ./"${1}.cbz" ./"${1}"
 fi
 
 if [ $# -eq 1 ] && [ ! -d "$1" ]
 then
-	ffmpeg -i "$1" -b:a 256k "${1[@]/%wav/mp3}"
+	echo "Error: provided argument ${1} is not a directory."
+	echo "Usage: $0 <directory_path>"
+	exit 3
 fi
 
 echo "$0 finished"

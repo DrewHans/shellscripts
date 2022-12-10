@@ -27,16 +27,27 @@ function check_is_root {
 	fi
 }
 
+function check_not_root {
+	if [[ $EUID -eq 0 ]]
+	then
+		echo "This script should not be run as root."
+		exit 1
+	fi
+}
+
 # safety checks
-check_dependency "flatpak"
-check_dependency "modprobe"
-check_flatpak_app_is_installed "com.obsproject.Studio"
-check_is_root
+# check_dependency "rsync"
+# check_dependency "rsyncasdfasdf"
+# check_is_root
+# check_not_root
 
-# needed to reload the v4l2loopback kernel module (it errors after first use)
-modprobe -r v4l2loopback
+# if [[ $# -ne 1 ]]
+# then
+#	 echo "Error: you must provide an argument1 and an argument"
+#	 echo "Usage: $0 <argument1> <argument2>"
+#	 exit 3
+# fi
 
-# launch obs and start the virtual camera automatically (and redirect STDERR to /dev/null)
-flatpak run com.obsproject.Studio --startvirtualcam 2>/dev/null
+# script logic
 
 echo "$0 finished"

@@ -1,14 +1,30 @@
 #!/usr/bin/env bash
 
 
-# exit if not running as root
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Error: You must run this script as root"
-    exit 1
+function check_is_root {
+	if [[ $EUID -ne 0 ]]
+	then
+		echo "This script must be run as root."
+		exit 1
+	fi
+}
+
+# safety checks
+check_is_root
+
+if ! command -v "apt" > /dev/null 2>&1
+then
+	apt update && apt upgrade --yes
 fi
 
-apt update && apt upgrade --yes
+if ! command -v "flatpak" > /dev/null 2>&1
+then
+	sudo -u ${SUDO_USER} flatpak update --assumeyes
+fi
 
-sudo -u ${SUDO_USER} flatpak update --assumeyes
+if ! command -v "yt-dlp" > /dev/null 2>&1
+then
+	yt-dlp --update
+fi
 
-yt-dlp --update
+echo "$0 finished"

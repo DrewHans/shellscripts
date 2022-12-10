@@ -22,3 +22,5 @@ echo -e $NOCOLOR$BOLD$WHITE'~|__( ^ .^)'$NOCOLOR
 echo -en $CYAN'-_-_-_-_-_-_-'
 echo -e $NOCOLOR$BOLD$WHITE'""  ""'$NOCOLOR
 echo
+
+echo "$0 finished"

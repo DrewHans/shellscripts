@@ -1,24 +1,31 @@
 #!/usr/bin/env bash
 
-# exit if running as root
-if [[ $(/usr/bin/id -u) -eq 0 ]]; then
-    echo "Do not run this script as root"
-    exit
-fi
 
-# exit if dos2unix is not installed
-command -v dos2unix >/dev/null 2>&1 || {
-    echo >&2 "dos2unix is not installed; aborting installer.";
-    exit 1;
+function check_dependency {
+	if ! command -v "$1" > /dev/null 2>&1
+	then
+		echo "This script requires $1 to be installed."
+		echo "Please use your distribution's package manager to install it."
+		exit 2
+	fi
 }
 
+function check_not_root {
+	if [[ $EUID -eq 0 ]]; then
+		echo "This script should not be run as root."
+		exit 1
+	fi
+}
+
+# safety checks
+check_not_root
+check_dependency "dos2unix"
+
 # copy bin to HOME
-cp -ru ./bin ~/
-for f in ~/bin/*.*sh; do
-    dos2unix $f
-    chmod 744 $f
+cp -ru ./bin $HOME/
+for f in $HOME/bin/*.*sh; do
+	dos2unix $f
+	chmod 744 $f
 done
 
-echo "shellscripts installed"
-
-exit
+echo "$0 finished"

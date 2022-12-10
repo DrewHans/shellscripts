@@ -6,3 +6,5 @@ vpnserver=$(cat /var/log/openvpn/connection.txt)
 echo "$vpnserver"
 echo ""
 cat /var/log/openvpn/status.txt
+
+echo "$0 finished"

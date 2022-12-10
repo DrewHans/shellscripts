@@ -2,3 +2,5 @@
 
 
 echo "${PATH//:/$'\n'}"
+
+echo "$0 finished"

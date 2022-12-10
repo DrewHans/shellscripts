@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 
 
-# exit if running as root
-if [[ $(/usr/bin/id -u) -eq 0 ]]; then
-    echo "Error: Do not run this script as root"
-    exit 1
-fi
-
-# check prerequisite program rsync is installed
-command -v rsync >/dev/null 2>&1 || {
-    echo "rsync program not found; aborting"
-    exit 1
+function check_dependency {
+	if ! command -v "$1" > /dev/null 2>&1
+	then
+		echo "This script requires $1 to be installed."
+		echo "Please use your distribution's package manager to install it."
+		exit 2
+	fi
 }
+
+function check_not_root {
+	if [[ $EUID -eq 0 ]]
+	then
+		echo "This script should not be run as root."
+		exit 1
+	fi
+}
+
+# safety checks
+check_not_root
+check_dependency "rsync"
 
 echo "Starting $0"
 
@@ -21,14 +30,14 @@ log_path="/home/nyancat"  # should be user's home dir
 
 if [[ ! -d "$src_path" ]]
 then
-    echo "$src_path directory not found; aborting"
-    exit 1
+	echo "$src_path directory not found; aborting"
+	exit 1
 fi
 
 if [[ ! -d "$dest_path" ]]
 then
-    echo "$dest_path directory not found; aborting"
-    exit 1
+	echo "$dest_path directory not found; aborting"
+	exit 1
 fi
 
 echo "Regenerating master.index file"

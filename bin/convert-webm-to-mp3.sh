@@ -1,17 +1,35 @@
 #!/usr/bin/env bash
 
 
-# check prerequisite program ffmpeg is installed
-command -v ffmpeg >/dev/null 2>&1 || {
-    echo "ffmpeg program not found; aborting"
-    exit 1
+function check_dependency {
+	if ! command -v "$1" > /dev/null 2>&1
+	then
+		echo "This script requires $1 to be installed."
+		echo "Please use your distribution's package manager to install it."
+		exit 2
+	fi
 }
 
-for f in *.webm; do
-  ffmpeg -i "$f" -b:a 128k "${f[@]/%webm/mp3}"
-done
-# note: we use 128k because webm files tend to be heavily compressed and
-#       there is usually no noticable improvement by saving at 256k
+# safety checks
+check_dependency "ffmpeg"
 
-# for single file:
-# ffmpeg -i "filename.webm" -b:a 128k "newfilename.mp3"
+if [ $# -eq 0 ]
+then
+	for f in *.webm; do
+		ffmpeg -i "$f" -b:a 128k "${f[@]/%webm/mp3}"
+	done
+fi
+
+if [ $# -eq 1 ] && [ -d "$1" ]
+then
+	for f in $1/*.webm; do
+		ffmpeg -i "$f" -b:a 128k "${f[@]/%webm/mp3}"
+	done
+fi
+
+if [ $# -eq 1 ] && [ ! -d "$1" ]
+then
+	ffmpeg -i "$1" -b:a 128k "${1[@]/%webm/mp3}"
+fi
+
+echo "$0 finished"

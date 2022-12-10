@@ -2,28 +2,28 @@
 
 
 function nuke_file() {
-    ## rm if file exists
-    [[ -f $1 ]] && rm $1
+	## rm if file exists
+	[[ -f $1 ]] && rm $1
 }
 
 function nuke_directory() {
-    ## rm if dir exists
-    [[ -d $1 ]] && rm -r $1
+	## rm if dir exists
+	[[ -d $1 ]] && rm -r $1
 }
 
 # destroy bash history if it exists
-nuke_file ~/.bash_history
+nuke_file $HOME/.bash_history
 
 # destroy brave browser cache if it exists
-nuke_directory ~/.cache/BraveSoftware
+nuke_directory $HOME/.cache/BraveSoftware
 
 # destroy keepassxc cache if it exists
-nuke_directory ~/.cache/keepassxc
+nuke_directory $HOME/.cache/keepassxc
 
 # destroy qbittorrent cache if it exists
-nuke_directory ~/.cache/qBittorrent
+nuke_directory $HOME/.cache/qBittorrent
 
 # destroy thumbnail cache if it exists
-nuke_directory ~/.cache/thumbnails
+nuke_directory $HOME/.cache/thumbnails
 
-echo "nuked"
+echo "$0 finished"
