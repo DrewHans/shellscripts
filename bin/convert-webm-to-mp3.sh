@@ -7,4 +7,11 @@ command -v ffmpeg >/dev/null 2>&1 || {
     exit 1
 }
 
-find . -type f -iname "*.webm" -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE%.webm}.mp3";' _ '{}' \;
+for f in *.webm; do
+  ffmpeg -i "$f" -b:a 128k "${f[@]/%webm/mp3}"
+done
+# note: we use 128k because webm files tend to be heavily compressed and
+#       there is usually no noticable improvement by saving at 256k
+
+# for single file:
+# ffmpeg -i "filename.webm" -b:a 128k "newfilename.mp3"

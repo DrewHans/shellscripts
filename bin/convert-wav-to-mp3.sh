@@ -7,8 +7,8 @@ command -v ffmpeg >/dev/null 2>&1 || {
     exit 1
 }
 
-for a in *.wav; do
-  ffmpeg -i "$a" -b:a 256k "${a[@]/%wav/mp3}"
+for f in *.wav; do
+  ffmpeg -i "$f" -b:a 256k "${f[@]/%wav/mp3}"
 done
 
 # for single file:

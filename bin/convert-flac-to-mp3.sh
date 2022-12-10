@@ -7,8 +7,8 @@ command -v ffmpeg >/dev/null 2>&1 || {
     exit 1
 }
 
-for a in *.flac; do
-  ffmpeg -i "$a" -b:a 256k "${a[@]/%flac/mp3}"
+for f in *.flac; do
+  ffmpeg -i "$f" -b:a 256k "${af[@]/%flac/mp3}"
 done
 
 # for single file:
