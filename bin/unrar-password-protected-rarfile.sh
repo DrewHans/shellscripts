@@ -20,9 +20,9 @@ then
 	exit 3
 fi
 
-$file_path=$1
-$file_password=$2
+$file_path="${1}"
+$file_password="${2}"
 
-unrar -p${file_password} $file_path
+unrar -p${file_password} "${file_path}"
 
 echo "$0 finished"
