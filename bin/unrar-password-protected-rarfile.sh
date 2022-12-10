@@ -20,9 +20,13 @@ then
 	exit 3
 fi
 
-$file_path="${1}"
-$file_password="${2}"
+file_path="${1}"
+file_password="${2}"
 
-unrar -p${file_password} "${file_path}"
+unrar -p${file_password} x -r "${file_path}"
+# note: unrar is stupid and it requires weird ordering of the arguments
+#       -p is a switch to set the password for all files in the rarfile
+#       x is a command to extract files with full (original) path
+#       -r is a switch to make unrar extract subdirectories recursively (must come after x command)
 
 echo "$0 finished"
