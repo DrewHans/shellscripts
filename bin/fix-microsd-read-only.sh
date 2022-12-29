@@ -1,21 +1,11 @@
 #!/usr/bin/env bash
 
 
-function check_is_root {
-	if [[ $EUID -ne 0 ]]
-	then
-		echo "This script must be run as root."
-		exit 1
-	fi
-}
+echo "Do not run this script, use it as reference"
+exit 1
 
-# safety checks
-check_is_root
-
-# first ensure that you have the correct device path (replace /dev/sXX as necessary)
-chown -hR nyancat /dev/sXX
-
-echo "Now remove the micro sd card and reinsert it"
-echo "After it mounts, it should not be \"readonly\" anymore"
-
-echo "$0 finished"
+# Open disks app, unmount the micro sd card
+# Click on the gear icon, select Edit Mount Options
+# Uncheck User Session Defaults, ensure Mount Options does not have ",ro", hit OK btn
+# Mount the micro sd card
+# Now you should be able to write to the disk
