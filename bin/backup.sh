@@ -26,7 +26,7 @@ echo "Starting $0"
 
 src_path="/media/veracrypt1"  # should be master drive
 dest_path="/media/veracrypt2"  # should be backup drive
-log_path="/home/nyancat"  # should be user's home dir
+log_path="/home/nyancat/Logs"  # can be any directory you want
 
 if [[ ! -d "$src_path" ]]
 then
