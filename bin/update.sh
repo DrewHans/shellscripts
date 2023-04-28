@@ -15,22 +15,24 @@ check_is_root
 if command -v "apt" > /dev/null 2>&1
 then
 	apt update && apt upgrade --yes
+	apt autoremove --yes
 else
-	echo "apt is not installed; skipping 'apt update && apt upgrade --yes'"
+	echo "apt is not installed, skipping"
 fi
 
 if command -v "flatpak" > /dev/null 2>&1
 then
 	sudo -u ${SUDO_USER} flatpak update --assumeyes
+	sudo -u ${SUDO_USER} flatpak uninstall --unused --assumeyes
 else
-	echo "flatpak is not installed; skipping 'flatpak update --assumeyes'"
+	echo "flatpak is not installed, skipping"
 fi
 
 if command -v "yt-dlp" > /dev/null 2>&1
 then
 	yt-dlp --update
 else
-	echo "yt-dlp is not installed; skipping 'yt-dlp --update'"
+	echo "yt-dlp is not installed, skipping"
 fi
 
 echo "$0 finished"
