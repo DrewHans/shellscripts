@@ -27,7 +27,7 @@ sudo vgchange -ay oldharddrivevol
 sudo lvscan
 
 # now create a mount directory
-sudo mkdir /media/nyancat/tmpmount
+sudo mkdir -p /media/nyancat/tmpmount
 
 # and now finally we mount the partition
 sudo mount /dev/oldharddrivevol/root /media/nyancat/tmpmount
