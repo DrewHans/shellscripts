@@ -29,6 +29,7 @@ apt upgrade --yes
 apt dist-upgrade --yes
 
 apt autoremove --yes
+apt autoremove --purge --yes
 
 apt autoclean --yes
 
