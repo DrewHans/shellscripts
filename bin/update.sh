@@ -20,6 +20,15 @@ else
 	echo "apt is not installed, skipping"
 fi
 
+if command -v "dnf" > /dev/null 2>&1
+then
+	dnf clean all
+	dnf check-update
+	dnf update
+else
+	echo "dnf is not installed, skipping"
+fi
+
 if command -v "flatpak" > /dev/null 2>&1
 then
 	sudo -u ${SUDO_USER} flatpak update --assumeyes
