@@ -70,12 +70,14 @@ CFLAGS+=\
 touch config.mk
 echo "BOARD?=system76/lemp11" >> config.mk
 
+# note config.mk should be at firmware-open/ec/config.mk
+
 # Step 5: Test your build
 make
 
 # if you get no errors, go on to next step
 
-# Step 6. Flash it to the laptop (make sure you are 80% charge and plugged in to power)
+# Step 6. Flash it to the laptop (make sure you are in firmware-open/ec, at 80% charge, and plugged in to power)
 make flash_internal
 
 # note: when flash finishes, the laptop will shutdown
