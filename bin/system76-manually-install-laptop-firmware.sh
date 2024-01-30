@@ -81,3 +81,4 @@ make
 make flash_internal
 
 # note: when flash finishes, the laptop will shutdown
+# turn it back on and check firmware by hitting ESC during bootsplash
