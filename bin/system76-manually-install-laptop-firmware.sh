@@ -38,12 +38,12 @@ cd firmware-open
 git checkout 42bf7a6
 # note: 42bf7a6 => 2023-09-08_42bf7a6 firmware
 
-# Step 3: Pull submodules and install dependencies
+# Step 3a: Pull submodules and install dependencies
 git submodule update --init --recursive
 ./scripts/deps.sh
 source ~/.cargo/env
 
-# Step 3b: Optional: Customize the fan profile
+# OPTIONAL Step 3b: Customize the fan profile
 # gedit ./ec/src/board/system76/lemp11/board.mk
 
 # Add these lines to set fan points
@@ -64,24 +64,24 @@ CFLAGS+=\
 '
 # note: the CFLAGS variable should be defined before including system76 common code line at bottom
 
-# Step 4: Create config.mk file and place your laptop model inside
+# OPTIONAL Step 3c: Create config.mk file and place your laptop model inside (required if step 3b)
 touch ./ec/config.mk
 echo "BOARD?=system76/lemp11" >> ./ec/config.mk
 
-# Step 5: Test your build
+# OPTIONAL Step 3d: Test your build (required if step 3c)
 cd ec
 make
 cd ..
 
 # if you get no errors, go on to next step
 
-# Step 6: Build the new custom firmware
+# Step 4: Build the new custom firmware
 ./scripts/build.sh lemp11
 
 # if you get no errors, go on to next step
 
-# Step 7: Flash it to the laptop (make sure you are at 80% charge and plugged in to power)
+# Step 5: Flash it to the laptop (make sure you are at 80% charge and plugged in to power)
 ./scripts/flash.sh lemp11
 
-# Step 8: Reboot
+# Step 6: Reboot
 sudo systemctl reboot
