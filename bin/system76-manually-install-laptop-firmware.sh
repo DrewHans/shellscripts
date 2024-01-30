@@ -39,14 +39,12 @@ git checkout 42bf7a6
 # note: 42bf7a6 => 2023-09-08_42bf7a6 firmware
 
 # Step 3: Pull submodules and install dependencies
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ./scripts/deps.sh
 source ~/.cargo/env
-cd ec
 
 # Step 3b: Optional: Customize the fan profile
-# vim ./src/board/system76/lemp11/board.mk
+# gedit ./ec/src/board/system76/lemp11/board.mk
 
 # Add these lines to set fan points
 # Note: (FAN_POINT(60, 40) means ‘If over 60 celsius for 5 seconds, turn fan to 40% speed‘.)
@@ -67,18 +65,23 @@ CFLAGS+=\
 # note: the CFLAGS variable should be defined before including system76 common code line at bottom
 
 # Step 4: Create config.mk file and place your laptop model inside
-touch config.mk
-echo "BOARD?=system76/lemp11" >> config.mk
-
-# note config.mk should be at firmware-open/ec/config.mk
+touch ./ec/config.mk
+echo "BOARD?=system76/lemp11" >> ./ec/config.mk
 
 # Step 5: Test your build
+cd ec
 make
+cd ..
 
 # if you get no errors, go on to next step
 
-# Step 6. Flash it to the laptop (make sure you are in firmware-open/ec, at 80% charge, and plugged in to power)
-make flash_internal
+# Step 6: Build the new custom firmware
+./scripts/build.sh lemp11
 
-# note: when flash finishes, the laptop will shutdown
-# turn it back on and check firmware by hitting ESC during bootsplash
+# if you get no errors, go on to next step
+
+# Step 7: Flash it to the laptop (make sure you are at 80% charge and plugged in to power)
+./scripts/flash.sh lemp11
+
+# Step 8: Reboot
+sudo systemctl reboot
