@@ -34,9 +34,9 @@ check_is_root
 git clone https://github.com/system76/firmware-open.git
 cd firmware-open
 
-# Step 2: Checkout the branch that corresponds to your current firmware version
+# Step 2: Checkout the branch that corresponds to the firmware version you want
 git checkout 42bf7a6
-# note: 42bf7a6 => 2023-09-08_42bf7a6 firmware
+# note: 42bf7a6 => 2023-09-08_42bf7a6 firmware version
 
 # Step 3a: Pull submodules and install dependencies
 git submodule update --init --recursive
@@ -44,7 +44,7 @@ git submodule update --init --recursive
 source ~/.cargo/env
 
 # OPTIONAL Step 3b: Customize the fan profile
-# gedit ./ec/src/board/system76/lemp11/board.mk
+gedit ./ec/src/board/system76/lemp11/board.mk
 
 # Add these lines to set fan points
 # Note: (FAN_POINT(60, 40) means ‘If over 60 celsius for 5 seconds, turn fan to 40% speed‘.)
@@ -86,7 +86,7 @@ cd ..
 # note: the flash.sh script last worked with the 2022-11 firmware update; every
 #       version of flash.sh after has not worked properly; if you can't get it
 #       to flash the new firmware image to the laptop, try using the old version
-#       of flash.sh instead. I had no problems flashing the two 2023 firmware 
+#       of flash.sh instead. I had no problems flashing the two 2023 firmware
 #       and ec roms with the old version of flash.sh.
 
 # Step 6: Reboot
