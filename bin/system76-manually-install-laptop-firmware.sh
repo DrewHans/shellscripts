@@ -83,5 +83,11 @@ cd ..
 # Step 5: Flash it to the laptop (make sure you are at 80% charge and plugged in to power)
 ./scripts/flash.sh lemp11
 
+# note: the flash.sh script last worked with the 2022-11 firmware update; every
+#       version of flash.sh after has not worked properly; if you can't get it
+#       to flash the new firmware image to the laptop, try using the old version
+#       of flash.sh instead. I had no problems flashing the two 2023 firmware 
+#       and ec roms with the old version of flash.sh.
+
 # Step 6: Reboot
 sudo systemctl reboot
