@@ -25,6 +25,8 @@ function process_video {
 			-strict experimental \
 			-b:a 128k \
 		"${1%.mp4}_HEVC.mp4"
+
+		# note, use h264_nvenc encoder for testing since it's faster
 	else
 		echo "Skipping $1 because video codec is $video_codec"
 	fi
