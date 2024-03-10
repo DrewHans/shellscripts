@@ -15,7 +15,16 @@ function process_video {
 	video_codec=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$1")
 
 	if [ $video_codec = "h264" ]; then
-		ffmpeg -i "$1" -c:v libx265 -preset medium -x265-params crf=28 -c:a aac -strict experimental -b:a 128k "${1%.mp4}_HEVC.mp4"
+		ffmpeg \
+		-hwaccel cuda \
+		-hwaccel_output_format cuda \
+		-i "$1" \
+		-c:v h264_nvenc \
+		-preset medium \
+		-x265-params crf=28 \
+		-c:a aac \
+		-strict experimental \
+		-b:a 128k "${1%.mp4}_HEVC.mp4"
 	else
 		echo "Skipping $1 because video codec is $video_codec"
 	fi
