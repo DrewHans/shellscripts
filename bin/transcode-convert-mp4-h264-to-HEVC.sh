@@ -10,26 +10,41 @@ function check_dependency {
 	fi
 }
 
+
+function process_video {
+	video_codec=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$1")
+
+	if [ $video_codec = "h264" ]; then
+		ffmpeg -i "$1" -c:v libx265 -preset medium -x265-params crf=28 -c:a aac -strict experimental -b:a 128k "${1%.mp4}_HEVC.mp4"
+	else
+		echo "Skipping $1 because video codec is $video_codec"
+	fi
+
+	echo ""
+}
+
+
 # safety checks
 check_dependency "ffmpeg"
+check_dependency "ffprobe"
 
 if [ $# -eq 0 ]
 then
 	for f in *.mp4; do
-		ffmpeg -i "$f" -c:v libx265 -preset medium -x265-params crf=28 -c:a aac -strict experimental -b:a 128k "HEVC_$f"
+		process_video "$f"
 	done
 fi
 
 if [ $# -eq 1 ] && [ -d "$1" ]
 then
 	for f in $1/*.mp4; do
-		ffmpeg -i "$f" -c:v libx265 -preset medium -x265-params crf=28 -c:a aac -strict experimental -b:a 128k "HEVC_$f"
+		process_video "$f"
 	done
 fi
 
 if [ $# -eq 1 ] && [ ! -d "$1" ]
 then
-	ffmpeg -i "$1" -c:v libx265 -preset medium -x265-params crf=28 -c:a aac -strict experimental -b:a 128k "HEVC_$1"
+	process_video "$1"
 fi
 
 echo "$0 finished"
