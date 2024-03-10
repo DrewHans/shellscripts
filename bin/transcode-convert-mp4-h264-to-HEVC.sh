@@ -20,11 +20,11 @@ function process_video {
 		-hwaccel_output_format cuda \
 		-i "$1" \
 		-c:v h264_nvenc \
-		-preset medium \
-		-x265-params crf=28 \
+			-preset medium \
 		-c:a aac \
-		-strict experimental \
-		-b:a 128k "${1%.mp4}_HEVC.mp4"
+			-strict experimental \
+			-b:a 128k \
+		"${1%.mp4}_HEVC.mp4"
 	else
 		echo "Skipping $1 because video codec is $video_codec"
 	fi
