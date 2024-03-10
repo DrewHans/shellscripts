@@ -19,7 +19,7 @@ function process_video {
 		-hwaccel cuda \
 		-hwaccel_output_format cuda \
 		-i "$1" \
-		-c:v h264_nvenc \
+		-c:v hevc_nvenc \
 			-preset medium \
 		-c:a aac \
 			-strict experimental \
