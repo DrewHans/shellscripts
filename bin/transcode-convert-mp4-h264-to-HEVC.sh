@@ -24,7 +24,7 @@ function process_video {
 		-c:a aac \
 			-strict experimental \
 			-b:a 128k \
-		"${1%.mp4}_HEVC.mp4"
+		"${1%.mp4} [HEVC].mp4"
 
 		# note, use h264_nvenc encoder for testing since it's faster
 	else
