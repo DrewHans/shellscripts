@@ -17,6 +17,9 @@ nuke_file $HOME/.bash_history
 # destroy brave browser cache if it exists
 nuke_directory $HOME/.cache/BraveSoftware
 
+# destroy firefox cache if it exists
+nuke_directory $HOME/.cache/mozilla/firefox
+
 # destroy keepassxc cache if it exists
 nuke_directory $HOME/.cache/keepassxc
 
