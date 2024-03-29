@@ -27,7 +27,7 @@ then
 	done
 fi
 
-if [ $# -eq 1 ] && [ ! -d "$1" ]
+if [ $# -eq 1 ] && [ -f "$1" ]
 then
 	ffmpeg -i "$1" -b:a 128k "${1[@]/%webm/mp3}"
 fi

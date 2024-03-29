@@ -30,7 +30,7 @@ then
 	zip -r ./"${1}.cbz" ./"${1}"
 fi
 
-if [ $# -eq 1 ] && [ ! -d "$1" ]
+if [ $# -eq 1 ] && [ -f "$1" ]
 then
 	echo "Error: provided argument ${1} is not a directory."
 	echo "Usage: $0 <directory_path>"

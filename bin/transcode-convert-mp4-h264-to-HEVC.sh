@@ -11,7 +11,7 @@ function check_dependency {
 }
 
 
-function process_video {
+function process_video_file {
 	video_codec=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$1")
 
 	if [ $video_codec = "h264" ]; then
@@ -42,20 +42,20 @@ check_dependency "ffprobe"
 if [ $# -eq 0 ]
 then
 	for f in *.mp4; do
-		process_video "$f"
+		process_video_file "$f"
 	done
 fi
 
 if [ $# -eq 1 ] && [ -d "$1" ]
 then
 	for f in $1/*.mp4; do
-		process_video "$f"
+		process_video_file "$f"
 	done
 fi
 
-if [ $# -eq 1 ] && [ ! -d "$1" ]
+if [ $# -eq 1 ] && [ -f "$1" ]
 then
-	process_video "$1"
+	process_video_file "$1"
 fi
 
 echo "$0 finished"

@@ -10,26 +10,31 @@ function check_dependency {
 	fi
 }
 
+
+function process_audio_file {
+	ffmpeg -i "$1" -b:a 256k "${1[@]/%flac/mp3}"
+}
+
 # safety checks
 check_dependency "ffmpeg"
 
 if [ $# -eq 0 ]
 then
 	for f in *.flac; do
-		ffmpeg -i "$f" -b:a 256k "${f[@]/%flac/mp3}"
+		process_audio_file "$f"
 	done
 fi
 
 if [ $# -eq 1 ] && [ -d "$1" ]
 then
 	for f in $1/*.flac; do
-		ffmpeg -i "$f" -b:a 256k "${f[@]/%flac/mp3}"
+		process_audio_file "$f"
 	done
 fi
 
-if [ $# -eq 1 ] && [ ! -d "$1" ]
+if [ $# -eq 1 ] && [ -f "$1" ]
 then
-	ffmpeg -i "$1" -b:a 256k "${1[@]/%flac/mp3}"
+	process_audio_file "$1"
 fi
 
 echo "$0 finished"

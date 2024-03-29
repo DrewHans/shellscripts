@@ -38,7 +38,7 @@ then
 	done
 fi
 
-if [ $# -eq 1 ] && [ ! -d "$1" ]
+if [ $# -eq 1 ] && [ -f "$1" ]
 then
 	create_chdfile "$1"
 fi
