@@ -81,6 +81,7 @@ do
 	# verify all three monitors are detected by system
 	if [ $NUM_MONITORS -ge 3 ]
 	then
+		sleep 5
 		launch_resize_and_move_apps
 		break
 	else
