@@ -23,9 +23,7 @@ check_dependency "dos2unix"
 
 # copy bin to HOME
 cp -ru ./bin $HOME/
-for f in $HOME/bin/*.*sh; do
-	dos2unix $f
-	chmod 744 $f
-done
+dos2unix --quiet $HOME/bin/*.*sh
+chmod 744 $HOME/bin/*.*sh
 
 echo "$0 finished"
