@@ -76,16 +76,15 @@ check_dependency "xdotool"
 
 for n in $(seq 1 6)
 do
+	sleep 10
 	NUM_MONITORS=$(xrandr --query | grep " connected" | wc -l)
 
 	# verify all three monitors are detected by system
 	if [ $NUM_MONITORS -ge 3 ]
 	then
-		sleep 5
+	    sleep 15
 		launch_resize_and_move_apps
 		break
-	else
-		sleep 10
 	fi
 done
 
