@@ -20,7 +20,7 @@ function check_not_root {
 function launch_resize_and_move_apps {
 	# launch, size, & move easyeffects flatpak app to preferred location
 	flatpak run com.github.wwmm.easyeffects > /dev/null 2>&1 & disown
-	sleep 1
+	sleep 5
 	EE_WINDOW_ID=$(xdotool search --onlyvisible --name "Easy Effects")
 	if [[ -n "$EE_WINDOW_ID" ]]
 	then
@@ -32,7 +32,7 @@ function launch_resize_and_move_apps {
 
 	# launch, size, & move ivpn app to preferred location
 	/opt/ivpn/ui/bin/ivpn-ui > /dev/null 2>&1 & disown
-	sleep 1
+	sleep 2
 	IVPN_WINDOW_ID=$(xdotool search --onlyvisible --name ivpn)
 	if [[ -n "$IVPN_WINDOW_ID" ]]
 	then
@@ -42,21 +42,9 @@ function launch_resize_and_move_apps {
 		echo "$0 failed to get ivpn-ui window id"
 	fi
 
-	# launch, size, & move keepassxc flatpak app to preferred location
-	flatpak run org.keepassxc.KeePassXC > /dev/null 2>&1 & disown
-	sleep 1
-	KPXC_WINDOW_ID=$(xdotool search --onlyvisible --name KeePassXC)
-	if [[ -n "$KPXC_WINDOW_ID" ]]
-	then
-		xdotool windowsize $KPXC_WINDOW_ID 1065 686
-		xdotool windowmove $KPXC_WINDOW_ID 3874 1213
-	else
-		echo "$0 failed to get keepassxc window id"
-	fi
-
 	# launch, size, & move terminal to preferred location
 	gnome-terminal
-	sleep 1
+	sleep 2
 	TERMINAL_WINDOW_ID=$(xdotool search --onlyvisible --name "$USER@$HOSTNAME")
 	if [[ -n "$TERMINAL_WINDOW_ID" ]]
 	then
@@ -64,6 +52,18 @@ function launch_resize_and_move_apps {
 		xdotool windowmove $TERMINAL_WINDOW_ID 3822 485
 	else
 		echo "$0 failed to get gnome-terminal window id"
+	fi
+
+	# launch, size, & move keepassxc flatpak app to preferred location
+	flatpak run org.keepassxc.KeePassXC > /dev/null 2>&1 & disown
+	sleep 2
+	KPXC_WINDOW_ID=$(xdotool search --onlyvisible --name KeePassXC)
+	if [[ -n "$KPXC_WINDOW_ID" ]]
+	then
+		xdotool windowsize $KPXC_WINDOW_ID 1065 673
+		xdotool windowmove $KPXC_WINDOW_ID 3872 1212
+	else
+		echo "$0 failed to get keepassxc window id"
 	fi
 
 	# note: '> /dev/null 2>&1' throws away the command output
